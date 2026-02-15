@@ -26,13 +26,13 @@ func _on_file_poller_timeout():
 
 func _on_file_dialog_file_selected(path):
 	FilePathInput.text = path
-	var image = Image.new()
-	var status = image.load(path)
+	var image := Image.new()
+	var status : Error = image.load(path)
 	if (status != OK):
 		FilePathInput.add_theme_color_override("font_color", Color.RED)
 		return
 	FilePathInput.remove_theme_color_override("font_color")
-	var texture = ImageTexture.create_from_image(image)
+	var texture := ImageTexture.create_from_image(image)
 	SpriteStack.sprite_sheet = texture
 	SpriteStack.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 
@@ -41,7 +41,6 @@ func _on_text_edit_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == 1 and event.pressed:
 			OpenDialog.visible = true
-
 
 func _on_layers_input_text_changed(new_text):
 	if not new_text.is_valid_int():

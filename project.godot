@@ -8,12 +8,16 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="ShaderStacker"
 config/description="GPU accelerated sprite stacking graphics."
 run/main_scene="res://demo/Demo.tscn"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.6")
 config/icon="res://addons/ShaderStacker/icon.png"
 
 [display]

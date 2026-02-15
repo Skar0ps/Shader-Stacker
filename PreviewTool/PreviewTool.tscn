@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://coup6rye4uqxu"]
+[gd_scene format=3 uid="uid://coup6rye4uqxu"]
 
-[ext_resource type="Script" path="res://addons/ShaderStacker/SpriteStack/SpriteStack.gd" id="1_17ihv"]
-[ext_resource type="Script" path="res://PreviewTool/PreviewTool.gd" id="1_m6560"]
-[ext_resource type="Script" path="res://addons/ShaderStacker/StackCamera/StackCamera.gd" id="2_mja10"]
+[ext_resource type="Script" uid="uid://b4g2ak7tr36j2" path="res://addons/ShaderStacker/SpriteStack/SpriteStack.gd" id="1_17ihv"]
+[ext_resource type="Script" uid="uid://dch0l8owroquf" path="res://PreviewTool/PreviewTool.gd" id="1_m6560"]
+[ext_resource type="Script" uid="uid://cpsgramhnqchs" path="res://addons/ShaderStacker/StackCamera/StackCamera.gd" id="2_mja10"]
 
-[node name="PreviewTool" type="Control"]
+[node name="PreviewTool" type="Control" unique_id=1697966339]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,11 +15,12 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_m6560")
 
-[node name="FilePoller" type="Timer" parent="."]
+[node name="FilePoller" type="Timer" parent="." unique_id=849776273]
 process_callback = 0
 autostart = true
 
-[node name="OpenDialog" type="FileDialog" parent="."]
+[node name="OpenDialog" type="FileDialog" parent="." unique_id=495287625]
+oversampling_override = 1.0
 title = "Open a File"
 size = Vector2i(1152, 648)
 ok_button_text = "Open"
@@ -27,7 +28,7 @@ file_mode = 0
 access = 2
 filters = PackedStringArray("*.png, *.jpg, *.jpeg ; Images\"")
 
-[node name="SpritePreview" type="SubViewportContainer" parent="."]
+[node name="SpritePreview" type="SubViewportContainer" parent="." unique_id=2127135679]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,20 +37,18 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SpritePreview"]
+[node name="SubViewport" type="SubViewport" parent="SpritePreview" unique_id=582192876]
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="SpriteStack" type="Node2D" parent="SpritePreview/SubViewport"]
+[node name="SpriteStack" type="Node2D" parent="SpritePreview/SubViewport" unique_id=1285132712]
 script = ExtResource("1_17ihv")
 
-[node name="StackCamera" type="Camera2D" parent="SpritePreview/SubViewport"]
-rotating = true
-current = true
+[node name="StackCamera" type="Camera2D" parent="SpritePreview/SubViewport" unique_id=1654791047]
 script = ExtResource("2_mja10")
 
-[node name="UI" type="MarginContainer" parent="."]
+[node name="UI" type="MarginContainer" parent="." unique_id=675614814]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,228 +60,136 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Block" type="VBoxContainer" parent="UI"]
+[node name="Block" type="VBoxContainer" parent="UI" unique_id=788917846]
 layout_mode = 2
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 1136.0
-offset_bottom = 632.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="FilePathInput" type="LineEdit" parent="UI/Block"]
+[node name="FilePathInput" type="LineEdit" parent="UI/Block" unique_id=89882275]
 layout_mode = 2
-offset_right = 1120.0
-offset_bottom = 31.0
 placeholder_text = "Click to open a sprite sheet ..."
 shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 
-[node name="Viewport" type="VBoxContainer" parent="UI/Block"]
+[node name="Viewport" type="VBoxContainer" parent="UI/Block" unique_id=894072621]
 layout_mode = 2
-offset_top = 35.0
-offset_right = 138.0
-offset_bottom = 96.0
 size_flags_horizontal = 0
 
-[node name="Label" type="Label" parent="UI/Block/Viewport"]
+[node name="Label" type="Label" parent="UI/Block/Viewport" unique_id=1252882249]
 layout_mode = 2
-offset_right = 138.0
-offset_bottom = 26.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "Viewport"
 
-[node name="GridContainer" type="GridContainer" parent="UI/Block/Viewport"]
+[node name="GridContainer" type="GridContainer" parent="UI/Block/Viewport" unique_id=688281106]
 layout_mode = 2
-offset_top = 30.0
-offset_right = 138.0
-offset_bottom = 61.0
 columns = 2
 
-[node name="PixelSizeLabel" type="Label" parent="UI/Block/Viewport/GridContainer"]
+[node name="PixelSizeLabel" type="Label" parent="UI/Block/Viewport/GridContainer" unique_id=1919442834]
 layout_mode = 2
-offset_top = 2.0
-offset_right = 67.0
-offset_bottom = 28.0
 text = "PixelSize"
 
-[node name="PixelSizeInput" type="LineEdit" parent="UI/Block/Viewport/GridContainer"]
+[node name="PixelSizeInput" type="LineEdit" parent="UI/Block/Viewport/GridContainer" unique_id=1990631670]
 layout_mode = 2
-offset_left = 71.0
-offset_right = 138.063
-offset_bottom = 31.0
 size_flags_horizontal = 0
 placeholder_text = "1"
 
-[node name="SpriteStack" type="VBoxContainer" parent="UI/Block"]
+[node name="SpriteStack" type="VBoxContainer" parent="UI/Block" unique_id=1670970838]
 layout_mode = 2
-offset_top = 100.0
-offset_right = 122.0
-offset_bottom = 266.0
 size_flags_horizontal = 0
 
-[node name="Label" type="Label" parent="UI/Block/SpriteStack"]
+[node name="Label" type="Label" parent="UI/Block/SpriteStack" unique_id=724166950]
 layout_mode = 2
-offset_right = 122.0
-offset_bottom = 26.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "Sprite Stack"
 
-[node name="GridContainer" type="GridContainer" parent="UI/Block/SpriteStack"]
+[node name="GridContainer" type="GridContainer" parent="UI/Block/SpriteStack" unique_id=1903645779]
 layout_mode = 2
-offset_top = 30.0
-offset_right = 122.0
-offset_bottom = 166.0
 columns = 2
 
-[node name="LayersLabel" type="Label" parent="UI/Block/SpriteStack/GridContainer"]
+[node name="LayersLabel" type="Label" parent="UI/Block/SpriteStack/GridContainer" unique_id=2121921778]
 layout_mode = 2
-offset_top = 2.0
-offset_right = 51.0
-offset_bottom = 28.0
 text = "Layers"
 
-[node name="LayersInput" type="LineEdit" parent="UI/Block/SpriteStack/GridContainer"]
+[node name="LayersInput" type="LineEdit" parent="UI/Block/SpriteStack/GridContainer" unique_id=809517398]
 layout_mode = 2
-offset_left = 55.0
-offset_right = 122.063
-offset_bottom = 31.0
 size_flags_horizontal = 0
 placeholder_text = "1"
 
-[node name="ZLabel" type="Label" parent="UI/Block/SpriteStack/GridContainer"]
+[node name="ZLabel" type="Label" parent="UI/Block/SpriteStack/GridContainer" unique_id=2037576283]
 layout_mode = 2
-offset_top = 37.0
-offset_right = 51.0
-offset_bottom = 63.0
 text = "Z"
 
-[node name="ZInput" type="LineEdit" parent="UI/Block/SpriteStack/GridContainer"]
+[node name="ZInput" type="LineEdit" parent="UI/Block/SpriteStack/GridContainer" unique_id=1382445777]
 layout_mode = 2
-offset_left = 55.0
-offset_top = 35.0
-offset_right = 122.063
-offset_bottom = 66.0
 size_flags_horizontal = 0
 placeholder_text = "0"
 
-[node name="YawLabel" type="Label" parent="UI/Block/SpriteStack/GridContainer"]
+[node name="YawLabel" type="Label" parent="UI/Block/SpriteStack/GridContainer" unique_id=102928232]
 layout_mode = 2
-offset_top = 72.0
-offset_right = 51.0
-offset_bottom = 98.0
 text = "Yaw"
 
-[node name="YawInput" type="LineEdit" parent="UI/Block/SpriteStack/GridContainer"]
+[node name="YawInput" type="LineEdit" parent="UI/Block/SpriteStack/GridContainer" unique_id=750886476]
 layout_mode = 2
-offset_left = 55.0
-offset_top = 70.0
-offset_right = 122.063
-offset_bottom = 101.0
 size_flags_horizontal = 0
 placeholder_text = "0.0°"
 
-[node name="PitchLabel" type="Label" parent="UI/Block/SpriteStack/GridContainer"]
+[node name="PitchLabel" type="Label" parent="UI/Block/SpriteStack/GridContainer" unique_id=870519828]
 layout_mode = 2
-offset_top = 107.0
-offset_right = 51.0
-offset_bottom = 133.0
 text = "Pitch"
 
-[node name="PitchInput" type="LineEdit" parent="UI/Block/SpriteStack/GridContainer"]
+[node name="PitchInput" type="LineEdit" parent="UI/Block/SpriteStack/GridContainer" unique_id=1676992807]
 layout_mode = 2
-offset_left = 55.0
-offset_top = 105.0
-offset_right = 122.063
-offset_bottom = 136.0
 size_flags_horizontal = 0
 placeholder_text = "1.0px"
 
-[node name="StackCamera" type="VBoxContainer" parent="UI/Block"]
+[node name="StackCamera" type="VBoxContainer" parent="UI/Block" unique_id=211742580]
 layout_mode = 2
-offset_top = 270.0
-offset_right = 138.0
-offset_bottom = 421.0
 size_flags_horizontal = 0
 
-[node name="Label" type="Label" parent="UI/Block/StackCamera"]
+[node name="Label" type="Label" parent="UI/Block/StackCamera" unique_id=1076414552]
 layout_mode = 2
-offset_right = 138.0
-offset_bottom = 26.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "Stack Camera"
 
-[node name="Rotation" type="GridContainer" parent="UI/Block/StackCamera"]
+[node name="Rotation" type="GridContainer" parent="UI/Block/StackCamera" unique_id=424591686]
 layout_mode = 2
-offset_top = 30.0
-offset_right = 138.0
-offset_bottom = 61.0
 columns = 2
 
-[node name="RotationLabel" type="Label" parent="UI/Block/StackCamera/Rotation"]
+[node name="RotationLabel" type="Label" parent="UI/Block/StackCamera/Rotation" unique_id=445441096]
 layout_mode = 2
-offset_top = 2.0
-offset_right = 67.0
-offset_bottom = 28.0
 text = "Rotation"
 
-[node name="RotationInput" type="LineEdit" parent="UI/Block/StackCamera/Rotation"]
+[node name="RotationInput" type="LineEdit" parent="UI/Block/StackCamera/Rotation" unique_id=370211727]
 layout_mode = 2
-offset_left = 71.0
-offset_right = 138.063
-offset_bottom = 31.0
 size_flags_horizontal = 0
 placeholder_text = "0.0°"
 
-[node name="RotationSlider" type="HSlider" parent="UI/Block/StackCamera"]
+[node name="RotationSlider" type="HSlider" parent="UI/Block/StackCamera" unique_id=651303980]
 layout_mode = 2
-offset_top = 65.0
-offset_right = 138.0
-offset_bottom = 81.0
-grow_horizontal = 2
-grow_vertical = 2
 max_value = 360.0
 step = 0.1
 allow_greater = true
 allow_lesser = true
 
-[node name="Zoom" type="GridContainer" parent="UI/Block/StackCamera"]
+[node name="Zoom" type="GridContainer" parent="UI/Block/StackCamera" unique_id=1261892818]
 layout_mode = 2
-offset_top = 85.0
-offset_right = 138.0
-offset_bottom = 151.0
 columns = 2
 
-[node name="ZoomXLabel" type="Label" parent="UI/Block/StackCamera/Zoom"]
+[node name="ZoomXLabel" type="Label" parent="UI/Block/StackCamera/Zoom" unique_id=1440177385]
 layout_mode = 2
-offset_top = 2.0
-offset_right = 55.0
-offset_bottom = 28.0
 text = "ZoomX"
 
-[node name="ZoomXInput" type="LineEdit" parent="UI/Block/StackCamera/Zoom"]
+[node name="ZoomXInput" type="LineEdit" parent="UI/Block/StackCamera/Zoom" unique_id=1557565733]
 layout_mode = 2
-offset_left = 59.0
-offset_right = 126.0
-offset_bottom = 31.0
 placeholder_text = "1.0"
 
-[node name="ZoomYLabel" type="Label" parent="UI/Block/StackCamera/Zoom"]
+[node name="ZoomYLabel" type="Label" parent="UI/Block/StackCamera/Zoom" unique_id=1970448019]
 layout_mode = 2
-offset_top = 37.0
-offset_right = 55.0
-offset_bottom = 63.0
 text = "ZoomY"
 
-[node name="ZoomYInput" type="LineEdit" parent="UI/Block/StackCamera/Zoom"]
+[node name="ZoomYInput" type="LineEdit" parent="UI/Block/StackCamera/Zoom" unique_id=1228083266]
 layout_mode = 2
-offset_left = 59.0
-offset_top = 35.0
-offset_right = 126.063
-offset_bottom = 66.0
 size_flags_horizontal = 0
 placeholder_text = "1.0"
 

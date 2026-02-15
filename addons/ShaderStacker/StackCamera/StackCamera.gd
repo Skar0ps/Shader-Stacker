@@ -1,42 +1,44 @@
 extends Camera2D
 class_name StackCamera
+## Camera that manages Z-sorting for [SpriteStack] and [Reset2D] nodes.
+##
+## This camera automatically sorts nodes in the "zsort" group based on their 
+## global position relative to the camera's rotation and their height [member SpriteStack.z] property.
 
+## The name of the group used for z-sorting nodes within this camera's viewport.
+var _sort_group_name: String
 
-var stackGroupName
+func _ready() -> void:
+	var id: int = get_viewport().get_viewport_rid().get_id()
+	_sort_group_name = "zsort{viewportRID}".format({ "viewportRID": id })
+	ignore_rotation = false
 
-
-func _ready():
-	var id = get_viewport().get_viewport_rid().get_id()
-	stackGroupName = "zsort{viewportRID}".format({ "viewportRID": id })
-	self.ignore_rotation = false
-
-
-func _process(delta):
+func _process(_delta: float) -> void:
 	if not enabled:
 		return
-	var tree = get_tree()
-	if not tree:
-		return
 	
-	var spritestack_nodes = get_tree().get_nodes_in_group(stackGroupName)
-	spritestack_nodes.sort_custom(screen_top_down_sort)
+	_update_render_order()
+
+func _update_render_order() -> void:
+	var nodes: Array[Node] = get_tree().get_nodes_in_group(_sort_group_name)
+	nodes.sort_custom(_sort_by_vertical_position)
 	
-	var z = 0 - spritestack_nodes.size() / 2
-	for i in range(0, spritestack_nodes.size()):
-		spritestack_nodes[i].z_index = z
-		spritestack_nodes[i].z_as_relative = false
-		z += 1
+	var z_index_offset: int = -nodes.size() / 2
+	
+	for i in nodes.size():
+		var node = nodes[i]
+		if node is Node2D:
+			node.z_index = z_index_offset + i
+			node.z_as_relative = false
 
-func get_z_level(node):
-	var node_z = 0
-	if node is SpriteStack or node is Reset2D:
-		node_z = node.z
-	return node_z
-
-func screen_top_down_sort(a, b):
-	var a_z = get_z_level(a)
-	var b_z = get_z_level(b)
-	if a_z != b_z:
-		return a_z > b_z
-	else:
-		return a.global_position.rotated(-global_rotation).y < b.global_position.rotated(-global_rotation).y
+func _sort_by_vertical_position(a: Node, b: Node) -> bool:
+	var height_a: int = 0 if a.get("z") == null else a.z
+	var height_b: int = 0 if b.get("z") == null else b.z
+	
+	if height_a != height_b:
+		return height_a > height_b
+	
+	var screen_y_a: float = 0.0 if a.get("global_position") == null else a.global_position.rotated(-global_rotation).y
+	var screen_y_b: float = 0.0 if b.get("global_position") == null else b.global_position.rotated(-global_rotation).y
+	
+	return screen_y_a < screen_y_b
